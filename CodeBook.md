@@ -1,7 +1,8 @@
 Source of Data: https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip for wearable tech. Full descriptors as to the raw data and descriptions of transformations applied by the data providers can be found within the zip file link. 
 
 Original data (from providers)[1]:
-"For each record it is provided:
+"
+For each record it is provided:
 ======================================
 - Triaxial acceleration from the accelerometer (total acceleration) and the estimated body acceleration.
 - Triaxial Angular velocity from the gyroscope. 
@@ -15,7 +16,8 @@ Notes:
 - Each feature vector is a row on the text file."
 
 Features are provided as described by the authors [1]:
-"Feature Selection 
+"
+Feature Selection 
 =================
 
 The features selected for this database come from the accelerometer and gyroscope 3-axial raw signals tAcc-XYZ and tGyro-XYZ. These time domain signals (prefix 't' to denote time) were captured at a constant rate of 50 Hz. Then they were filtered using a median filter and a 3rd order low pass Butterworth filter with a corner frequency of 20 Hz to remove noise. Similarly, the acceleration signal was then separated into body and gravity acceleration signals (tBodyAcc-XYZ and tGravityAcc-XYZ) using another low pass Butterworth filter with a corner frequency of 0.3 Hz. 
@@ -28,21 +30,37 @@ These signals were used to estimate variables of the feature vector for each pat
 '-XYZ' is used to denote 3-axial signals in the X, Y and Z directions.
 
 tBodyAcc-XYZ
+
 tGravityAcc-XYZ
+
 tBodyAccJerk-XYZ
+
 tBodyGyro-XYZ
+
 tBodyGyroJerk-XYZ
+
 tBodyAccMag
+
 tGravityAccMag
+
 tBodyAccJerkMag
+
 tBodyGyroMag
+
 tBodyGyroJerkMag
+
 fBodyAcc-XYZ
+
 fBodyAccJerk-XYZ
+
 fBodyGyro-XYZ
+
 fBodyAccMag
+
 fBodyAccJerkMag
+
 fBodyGyroMag
+
 fBodyGyroJerkMag"
 
 
@@ -70,7 +88,7 @@ Inputs: R data frame from the downloadData() function described above
 Purpose: calculate mean values for each variable for a single subject, activity combination from the dataframe created from DownloadData.
 Outputs: Mean values of variables for subject, activity pairings for each type of mean and std. deviation variable observed.
 
-All variables remain the same as described above: standard deviation and mean measurements at point in time from the original dataset. This file takes the mean for all entries with the same activityName and subject. For each of the variables, the mean is a simple mean (sum of entries divided by the number of entries).
+All variables remain the same as described above: standard deviation and mean measurements for each of the features above where available are taken at point in time from the original dataset. The transformation applid is for each mean/ standard deviation variable, the overall the mean for all entries with the same activityName and subject is taken. For each of the variables, the mean is a simple mean (sum of entries divided by the number of entries).
 All units remain the same as in the original file.
 
 Data has been provided by:
