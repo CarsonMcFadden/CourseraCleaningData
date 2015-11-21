@@ -1,3 +1,6 @@
+#This code downloads data from a zipfile, takes labels for the data and concatenates it with the data. The code
+# drops any non-mean or non-standard deviation variable observations, it adds descriptors to the data for column variables
+# and the related subject and activity related to the data. It returns the resulting clean data frame for analysis.
 downloadData <- function (){
     #address for the data
     urlAddy <- "https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip"
@@ -20,17 +23,18 @@ downloadData <- function (){
     datab <- read.table(unz(temp, "UCI HAR Dataset/train/X_train.txt"))         #train data set values
     datac <- read.table(unz(temp, "UCI HAR Dataset/train/y_train.txt"))         #train data set training labels
     
-    #These are the activity names that will be used to add descriptors to the tidy dataset
-    acts <- read.table(unz(temp, "UCI HAR Dataset/activity_labels.txt")) 
-    colnames(acts)<-c('Training','ActivityName') #Labels are assigned to these columns, note that the training label is particularly sensitive
-  
-    
     #combine all of the necessary training dataset into single dataframe df2
     df2 <- cbind(dataa,datac)
     df2 <- cbind(df2,datab)
     
     #combine the datasets into a single dataframe df
     df <- rbind(df1,df2)
+    
+    
+    #These are the activity names that will be used to add descriptors to the tidy dataset
+    acts <- read.table(unz(temp, "UCI HAR Dataset/activity_labels.txt")) 
+    colnames(acts)<-c('Training','ActivityName') #Labels are assigned to these columns, note that the training label is particularly sensitive
+    
     
     #This extracts the features titles - contains all of the titles
     df.labels <- read.table(unz(temp,"UCI HAR Dataset/features.txt")) 
@@ -59,9 +63,12 @@ downloadData <- function (){
     df
 }
 
+#runAnalysis function returns dataframe with the means for each of the mean and std. dev. variables from the dataframe
+#created above for each unique activity, subject pair and returns a summary dataframe with those subject, activity 
 run_analysis <- function() {
   library(dplyr)
   df <- downloadData()
+  #group data by the subject and activity; take means of each of their values and return this dataframe.
   dfAvg <- df %>% group_by(Subject,ActivityName) %>% summarize_each(funs(mean))
   dfAvg
 }
